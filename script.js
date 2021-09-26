@@ -14,7 +14,7 @@ function player_update() {
         playerObject = Img;
         playerObject.scaleToWidth(140);
         playerObject.scaleToHeight(140);
-        playerObejct.set({
+        playerObject.set({
             top: yCoordinate, left: xCoordinate
         });
         canvas.add(playerObject);
@@ -23,6 +23,7 @@ function player_update() {
 
 function new_image(get_image) {
     fabric.Image.fromURL(get_image, function(Img) {
+        console.log("inside new_image function");
         blockObject = Img;
         blockObject.scaleToWidth(blockWidth);
         blockObject.scaleToHeight(blockHeight);
@@ -97,5 +98,41 @@ function keyDown(e) {
     if(keyPressed == "39") {
         right();
         console.log("right key");
+    }
+}
+
+function forward() {
+    if(yCoordinate >= 0) {
+        yCoordinate = yCoordinate - blockHeight;
+        console.log("Forward key, x = " + xCoordinate + ", y = " + yCoordinate);
+        canvas.remove(playerObject);
+        player_update();
+    }
+}
+
+function down() {
+    if(yCoordinate < 700) {
+        yCoordinate = yCoordinate + blockHeight;
+        console.log("Down key, x = " + xCoordinate + ", y = " + yCoordinate);
+        canvas.remove(playerObject);
+        player_update();
+    }
+}
+
+function left() {
+    if(xCoordinate > 0) {
+        xCoordinate = xCoordinate - blockWidth;
+        console.log("Left key, x = " + xCoordinate + ", y = " +yCoordinate);
+        canvas.remove(playerObject);
+        player_update();
+    }
+}
+
+function right() {
+    if(xCoordinate < 700) {
+        xCoordinate = xCoordinate + blockWidth;
+        console.log("Right key, x = " + xCoordinate + ", y = " + yCoordinate);
+        canvas.remove(playerObject);
+        player_update();
     }
 }
